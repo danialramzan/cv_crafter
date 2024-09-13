@@ -1,0 +1,4 @@
+json
+jinja2
+python-dotenv
+openai
