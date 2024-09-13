@@ -1,0 +1,61 @@
+{
+    "name": "Danial Zoraiz Ramzan",
+    "location": "Vancouver, BC",
+    "email": "danrmzn@student.ubc.ca",
+    "phone": "+1-236-996-2015",
+    "github": "https://github.com/danialramzan",
+    "linkedin": "https://linkedin.com/in/danialramzan",
+    "experience": [
+        {
+            "index": 0,
+            "title": "Software Engineer",
+            "company": "UBC Subbots Engineering Design Team",
+            "location": "Vancouver, BC",
+            "dates": "Oct 2023 – Present",
+            "description": [
+                "Implemented \\textbf{digital filtering} and \\textbf{Fast Fourier Transform} on microphone data using Numpy and Pandas in Python.",
+                "Set up a \\textbf{ngrok connection} on a Raspberry Pi to SSH into it."
+            ],
+            "tags": ["engineering", "software", "Python", "Raspberry Pi"]
+        },
+        {
+            "index": 1,
+            "title": "Backend Developer",
+            "company": "Loki",
+            "location": "Toronto, ON",
+            "dates": "Dec 2023 – July 2024",
+            "description": [
+                "Excelled as a top \\textbf{PERN stack developer} at Loki, implementing \\textbf{Auth, Bookings, Stripe Payments, JWT Tokens}.",
+                "Dockerized the PostgreSQL database, reducing setup time and ensuring consistency across developer environments."
+            ],
+            "tags": ["backend", "PERN", "PostgreSQL", "Docker"]
+        }
+    ],
+    "projects": [
+        {
+            "index": 0,
+            "name": "FinanciallyFit: Reverse Attendance-Based Java Billing App",
+            "link": "https://github.com/danialramzan/FinanciallyFitGymApp",
+            "dates": "Sept 2023 – Dec 2023",
+            "description": [
+                "Developed a \\textbf{novel full-stack gym billing system}, imposing financial penalties for missed gym sessions.",
+                "Achieved \\textbf{102\\%} on the course project by implementing CI/CD principles."
+            ],
+            "tags": ["Java", "full-stack", "billing", "CI/CD"]
+        },
+        {
+            "index": 1,
+            "name": "Pulsar Classifier: KNN Machine Learning Classification",
+            "link": "https://github.com/danialramzan/pulsar-classifier",
+            "dates": "Mar 2023 – Apr 2023",
+            "description": [
+                "Led a team of 4 people on a \\textbf{data science} project using R to accurately classify pulsars using the KNN machine learning algorithm.",
+                "Achieved a \\textbf{95\\% accuracy rate} in the project using Jupyter Notebooks."
+            ],
+            "tags": ["machine learning", "data science", "KNN", "R"]
+        }
+    ],
+    "skills": [
+        "PHP", "Java", "Python", "C/C++", "SQL (Postgres)", "JavaScript", "TypeScript", "HTML/CSS", "R", "Racket"
+    ]
+}
