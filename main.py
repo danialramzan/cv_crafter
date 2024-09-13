@@ -34,7 +34,6 @@ def generate_latex(resume_data, experiences, projects):
     \usepackage{titlesec}
     \usepackage{marvosym}
     \usepackage{xcolor}
-    \usepackage[usenames,dvipsnames]{color}
     \usepackage{verbatim}
     \usepackage{enumitem}
     \usepackage[hidelinks]{hyperref}
@@ -48,17 +47,180 @@ def generate_latex(resume_data, experiences, projects):
     \input{glyphtounicode}
     \usepackage{caption}
     \usepackage[margin=1in,bottom=0.2in,marginparwidth=0.8in,marginparsep=0.1in]{geometry}
-
     
+    
+    %%%%%%%%%%%%%%%%%%%%%%%HYPERLINKS%%%%%%%%%%%%%%%%%%%%%%%%
+
+    % Define the HYPERLINKON variable
+    \newif\ifHYPERLINKON
+    \HYPERLINKONtrue  % Change to \HYPERLINKONfalse to disable hyperlinks
+
+
+    %----------FONT OPTIONS----------
+    % sans-serif
+    % \usepackage[sfdefault]{FiraSans}
+    % \usepackage[sfdefault]{roboto}
+    % \usepackage[sfdefault]{noto-sans}
+    % \usepackage[default]{sourcesanspro}
+    
+    % serif
+    % \usepackage{CormorantGaramond}
+    % \usepackage{charter}
+    
+    \usepackage{helvet}
+    \renewcommand{\familydefault}{\sfdefault}
+    \usepackage[T1]{fontenc}
+    
+    \pagestyle{fancy}
+    \fancyhf{} % clear all header and footer fields
+    \fancyfoot{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    
+    % Adjust margins
+    \addtolength{\oddsidemargin}{-0.6in}
+    \addtolength{\evensidemargin}{-0.5in}
+    \addtolength{\textwidth}{1.19in}
+    \addtolength{\topmargin}{-.7in}
+    \addtolength{\textheight}{1.4in}
+    
+    \urlstyle{same}
+    
+    \raggedbottom
+    \raggedright
+    \setlength{\tabcolsep}{0in}
+    
+    % Sections formatting
+    \titleformat{\section}{
+    \vspace{-4pt}\scshape\raggedright\large\bfseries\color{UBCblue}
+    }{}{0em}{}[\color{UBCblue}\titlerule \vspace{-5pt}]
+    % Ensure that generate pdf is machine readable/ATS parsable
+    \pdfgentounicode=1
+    
+    %-------------------------
+    % Custom commands
+    
+    {% raw %}
+    
+    \newcommand{\resumeItem}[1]{
+      \item\small{
+        {#1 \vspace{-2pt}}
+      }
+    }
+    
+    \newcommand{\classesList}[4]{
+        \item\small{
+            {#1 #2 #3 #4 \vspace{-2pt}}
+      }
+    }
+    
+    \newcommand{\resumeSubheading}[4]{
+      \vspace{-2pt}\item
+        \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+          \textbf{#1} & \textbf{\small \textcolor{gray}{#2}} \\
+          \textit{\small#3} & \textit{\small {\textcolor{gray}{#4}}} \\
+        \end{tabular*}\vspace{-7pt}
+    }
+    
+    
+    \newcommand{\resumeSubSubheading}[2]{
+        \item
+        \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+          \textit{\small#1} & \textit{\small #2} \\
+        \end{tabular*}\vspace{-7pt}
+    }
+    
+    \newcommand{\resumeProjectHeading}[2]{
+        \item
+        \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+          \textbf{\small #1} & \textbf{\small \textcolor{gray}{#2}}\\
+        \end{tabular*}\vspace{-7pt}
+    }
+    
+    
+    \newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+    
+    {% endraw %}
+    
+    %%%%%%%%%%%%%%%%%%%% ADDING RAW AND ENDRAW MAKES JINJA NOT INTERPRET THE ABOVE AS COMMANDS %%%%%
+    
+    \renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+    \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+    
+    \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+    \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+    \newcommand{\resumeItemListStart}{\begin{itemize}}
+    \newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+    
+    \definecolor{UBCblue}{HTML}{0b133c}
+    
+    %-------------------------------------------
+    %%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+    % Other packages and configurations
+    \usepackage{graphicx}
+    \usepackage[empty]{fullpage}
+    \usepackage{fancyhdr}
+    % ... all other packages and custom commands
+    
+    \pagestyle{fancy}
+    \fancyhf{} % clear all header and footer fields
+    \fancyfoot{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    % Adjust margins
+    % ... margin adjustments and other configurations
+    
+    
+    % Other packages and configurations
+    \usepackage{graphicx}
+    \usepackage[empty]{fullpage}
+    \usepackage{fancyhdr}
+    % ... all other packages and custom commands
+    
+    \pagestyle{fancy}
+    \fancyhf{} % clear all header and footer fields
+    \fancyfoot{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    % Adjust margins
+    % ... margin adjustments and other configurations
+    
+    \begin{document}
+    
+    % Trying to eliminate all margins for the image
+    \noindent
+    \begin{minipage}{\textwidth}
+    
+      
+      \vspace*{-40pt} % Adjust as needed to reduce space before the heading
+    \end{minipage}
+    
+    % Your heading and rest of the resume content
+    
+    \vspace{-13pt}
+    {\color{UBCblue}\huge \scshape 
+    \textbf{Danial Zoraiz Ramzan}} \\ \vspace{1pt}
+    {\color{UBCblue}Vancouver, BC • Canadian Citizen • \faGlobe \hspace{0.in} 
+    \underline{\ifHYPERLINKON\href{https://danialramzan.github.io/}{danialramzan.github.io/}\else 
+    danialramzan.github.io/\fi}} \\ \vspace{1pt}
+    {\color{UBCblue}\small 
+    \raisebox{-0.1\height}{\faIcon{phone-square-alt}} 
+    \underline{\ifHYPERLINKON\href{tel:+12369962015}{1-236-996-2015}\else 1-236-996-2015\fi} ~ 
+    \raisebox{-0.2\height}{\faIcon{envelope-square}} 
+    \underline{\ifHYPERLINKON\href{mailto:danrmzn@student.ubc.ca}{danrmzn@student.ubc.ca}\else danrmzn@student.ubc.ca\fi}  ~ 
+    \raisebox{-0.2\height}{\faLinkedin\ \underline{\ifHYPERLINKON\href{https://linkedin.com/in/danialramzan}{linkedin.com/in/danialramzan}\else linkedin.com/in/danialramzan\fi}}  ~
+    \raisebox{-0.2\height}{\faGithubSquare\ \underline{\ifHYPERLINKON\href{https://github.com/danialramzan}{github.com/danialramzan}\else github.com/danialramzan\fi}}}
+    \vspace{-8pt}
+    
+    % The rest of your document content follows...
+    
+    % The rest of your document starts here
 
 
     \setlength{\parskip}{0pt} % Reduce space between paragraphs
     \setlength{\parindent}{0pt} % No paragraph indent
 
-    \begin{document}
-
-    %-----------HEADER-----------
-    {\color{blue}\huge\scshape\textbf{{{ name}}}}
 
  %   \vspace{1pt}
  %   {{ location }} • \href{mailto:{{ email }}}{{ email }} ~ 
@@ -106,8 +268,8 @@ def generate_latex(resume_data, experiences, projects):
         phone=resume_data['phone'],
         github=resume_data['github'],
         linkedin=resume_data['linkedin'],
-        experiences=experiences,
-        projects=projects
+        # experiences=experiences,
+        # projects=projects
     )
 
     # Write the rendered LaTeX to a file
@@ -140,8 +302,14 @@ project_indices = [0]  # Include only the first project
 # print("Extracted Keywords:", keywords)
 
 # Filter the experiences and projects based on the indices
-selected_experiences = filter_items_by_indices(resume_data['experience'], experience_indices)
-selected_projects = filter_items_by_indices(resume_data['projects'], project_indices)
+
+
+# STUB
+selected_experiences = 0
+selected_projects = 0
+
+#selected_experiences = filter_items_by_indices(resume_data['experience'], experience_indices)
+#selected_projects = filter_items_by_indices(resume_data['projects'], project_indices)
 
 # Generate and compile the LaTeX resume
 generate_latex(resume_data, selected_experiences, selected_projects)
