@@ -25,256 +25,20 @@ def filter_items_by_indices(items, indices):
 # Function to generate LaTeX from filtered data
 def generate_latex(resume_data, experiences, projects):
     # Define the LaTeX template
-    latex_template = r"""
-    \documentclass[letterpaper,11pt]{article}
-    
-    \usepackage{latexsym}
-    \usepackage[empty]{fullpage}
-    \usepackage{graphicx}
-    \usepackage{titlesec}
-    \usepackage{marvosym}
-    \usepackage{xcolor}
-    \usepackage{verbatim}
-    \usepackage{enumitem}
-    \usepackage[hidelinks]{hyperref}
-    \usepackage{fancyhdr}
-    \usepackage[english]{babel}
-    \usepackage{tabularx}
-    \usepackage{fontawesome5}
-    \usepackage{multicol}
-    \setlength{\multicolsep}{-3.0pt}
-    \setlength{\columnsep}{-1pt}
-    \input{glyphtounicode}
-    \usepackage{caption}
-    \usepackage[margin=1in,bottom=0.2in,marginparwidth=0.8in,marginparsep=0.1in]{geometry}
-    
-    
-    %%%%%%%%%%%%%%%%%%%%%%%HYPERLINKS%%%%%%%%%%%%%%%%%%%%%%%%
 
-    % Define the HYPERLINKON variable
-    \newif\ifHYPERLINKON
-    \HYPERLINKONtrue  % Change to \HYPERLINKONfalse to disable hyperlinks
-
-
-    %----------FONT OPTIONS----------
-    % sans-serif
-    % \usepackage[sfdefault]{FiraSans}
-    % \usepackage[sfdefault]{roboto}
-    % \usepackage[sfdefault]{noto-sans}
-    % \usepackage[default]{sourcesanspro}
-    
-    % serif
-    % \usepackage{CormorantGaramond}
-    % \usepackage{charter}
-    
-    \usepackage{helvet}
-    \renewcommand{\familydefault}{\sfdefault}
-    \usepackage[T1]{fontenc}
-    
-    \pagestyle{fancy}
-    \fancyhf{} % clear all header and footer fields
-    \fancyfoot{}
-    \renewcommand{\headrulewidth}{0pt}
-    \renewcommand{\footrulewidth}{0pt}
-    
-    % Adjust margins
-    \addtolength{\oddsidemargin}{-0.6in}
-    \addtolength{\evensidemargin}{-0.5in}
-    \addtolength{\textwidth}{1.19in}
-    \addtolength{\topmargin}{-.7in}
-    \addtolength{\textheight}{1.4in}
-    
-    \urlstyle{same}
-    
-    \raggedbottom
-    \raggedright
-    \setlength{\tabcolsep}{0in}
-    
-    % Sections formatting
-    \titleformat{\section}{
-    \vspace{-4pt}\scshape\raggedright\large\bfseries\color{UBCblue}
-    }{}{0em}{}[\color{UBCblue}\titlerule \vspace{-5pt}]
-    % Ensure that generate pdf is machine readable/ATS parsable
-    \pdfgentounicode=1
-    
-    %-------------------------
-    % Custom commands
-    
-    {% raw %}
-    
-    \newcommand{\resumeItem}[1]{
-      \item\small{
-        {#1 \vspace{-2pt}}
-      }
-    }
-    
-    \newcommand{\classesList}[4]{
-        \item\small{
-            {#1 #2 #3 #4 \vspace{-2pt}}
-      }
-    }
-    
-    \newcommand{\resumeSubheading}[4]{
-      \vspace{-2pt}\item
-        \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
-          \textbf{#1} & \textbf{\small \textcolor{gray}{#2}} \\
-          \textit{\small#3} & \textit{\small {\textcolor{gray}{#4}}} \\
-        \end{tabular*}\vspace{-7pt}
-    }
-    
-    
-    \newcommand{\resumeSubSubheading}[2]{
-        \item
-        \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-          \textit{\small#1} & \textit{\small #2} \\
-        \end{tabular*}\vspace{-7pt}
-    }
-    
-    \newcommand{\resumeProjectHeading}[2]{
-        \item
-        \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
-          \textbf{\small #1} & \textbf{\small \textcolor{gray}{#2}}\\
-        \end{tabular*}\vspace{-7pt}
-    }
-    
-    
-    \newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
-    
-    {% endraw %}
-    
-    %%%%%%%%%%%%%%%%%%%% ADDING RAW AND ENDRAW MAKES JINJA NOT INTERPRET THE ABOVE AS COMMANDS %%%%%
-    
-    \renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
-    \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
-    
-    \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
-    \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-    \newcommand{\resumeItemListStart}{\begin{itemize}}
-    \newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
-    
-    \definecolor{UBCblue}{HTML}{0b133c}
-    
-    %-------------------------------------------
-    %%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
-    % Other packages and configurations
-    \usepackage{graphicx}
-    \usepackage[empty]{fullpage}
-    \usepackage{fancyhdr}
-    % ... all other packages and custom commands
-    
-    \pagestyle{fancy}
-    \fancyhf{} % clear all header and footer fields
-    \fancyfoot{}
-    \renewcommand{\headrulewidth}{0pt}
-    \renewcommand{\footrulewidth}{0pt}
-    % Adjust margins
-    % ... margin adjustments and other configurations
-    
-    
-    % Other packages and configurations
-    \usepackage{graphicx}
-    \usepackage[empty]{fullpage}
-    \usepackage{fancyhdr}
-    % ... all other packages and custom commands
-    
-    \pagestyle{fancy}
-    \fancyhf{} % clear all header and footer fields
-    \fancyfoot{}
-    \renewcommand{\headrulewidth}{0pt}
-    \renewcommand{\footrulewidth}{0pt}
-    % Adjust margins
-    % ... margin adjustments and other configurations
-    
-    \begin{document}
-    
-    % Trying to eliminate all margins for the image
-    \noindent
-    \begin{minipage}{\textwidth}
-    
-      
-      \vspace*{-40pt} % Adjust as needed to reduce space before the heading
-    \end{minipage}
-    
-    % Your heading and rest of the resume content
-    
-    \vspace{-13pt}
-    {\color{UBCblue}\huge \scshape 
-    \textbf{Danial Zoraiz Ramzan}} \\ \vspace{1pt}
-    {\color{UBCblue}Vancouver, BC • Canadian Citizen • \faGlobe \hspace{0.in} 
-    \underline{\ifHYPERLINKON\href{https://danialramzan.github.io/}{danialramzan.github.io/}\else 
-    danialramzan.github.io/\fi}} \\ \vspace{1pt}
-    {\color{UBCblue}\small 
-    \raisebox{-0.1\height}{\faIcon{phone-square-alt}} 
-    \underline{\ifHYPERLINKON\href{tel:+12369962015}{1-236-996-2015}\else 1-236-996-2015\fi} ~ 
-    \raisebox{-0.2\height}{\faIcon{envelope-square}} 
-    \underline{\ifHYPERLINKON\href{mailto:danrmzn@student.ubc.ca}{danrmzn@student.ubc.ca}\else danrmzn@student.ubc.ca\fi}  ~ 
-    \raisebox{-0.2\height}{\faLinkedin\ \underline{\ifHYPERLINKON\href{https://linkedin.com/in/danialramzan}{linkedin.com/in/danialramzan}\else linkedin.com/in/danialramzan\fi}}  ~
-    \raisebox{-0.2\height}{\faGithubSquare\ \underline{\ifHYPERLINKON\href{https://github.com/danialramzan}{github.com/danialramzan}\else github.com/danialramzan\fi}}}
-    \vspace{-8pt}
-    
-    % The rest of your document content follows...
-    
-    % The rest of your document starts here
-
-
-    \setlength{\parskip}{0pt} % Reduce space between paragraphs
-    \setlength{\parindent}{0pt} % No paragraph indent
-
-
- %   \vspace{1pt}
- %   {{ location }} • \href{mailto:{{ email }}}{{ email }} ~ 
-  %  \href{tel:+{{ phone }}}{{ phone }} ~ 
- %   \href{{ linkedin }}{{ linkedin }} ~ 
- %   \href{{ github }}{{ github }}
-
- %   %-----------EXPERIENCE-----------
-   % \section{EXPERIENCE}
-  %  \begin{itemize}
-  %      {% for exp in experiences %}
-  %      \item \textbf{{ exp.title }} at {{ exp.company }} | {{ exp.location }} ({{ exp.dates }})
-   %     \begin{itemize}
-   %         {% for desc in exp.description %}
-   %         \item {{ desc | safe }}
-  %          {% endfor %}
- %       \end{itemize}
- %       {% endfor %}
- %   \end{itemize}
-%
-  %  %-----------PROJECTS-----------
- %   \section{PROJECTS}
-  %  \begin{itemize}
-%        {% for proj in projects %}
-  %      \item \textbf{{ proj.name }} | \href{{ proj.link }}{{ proj.name }} ({{ proj.dates }})
-  %      \begin{itemize}
-   %         {% for desc in proj.description %}
-  %          \item {{ desc | safe }}
- %           {% endfor %}
- %       \end{itemize}
- %       {% endfor %}
-  %  \end{itemize}
-%
-    \end{document}
-    """
-
-    # Create a Jinja2 template
-    template = Template(latex_template)
-
-    # Render the LaTeX template with the provided resume data
-    rendered_latex = template.render(
-        name=resume_data['name'],
-        location=resume_data['location'],
-        email=resume_data['email'],
-        phone=resume_data['phone'],
-        github=resume_data['github'],
-        linkedin=resume_data['linkedin'],
-        # experiences=experiences,
-        # projects=projects
-    )
+    with open('resume_template.tex', 'r') as template_file:
+        latex_template = template_file.read()
 
     # Write the rendered LaTeX to a file
     with open("generated_resume.tex", "w") as f:
-        f.write(rendered_latex)
+        f.write(latex_template)
+
+    experiences_json_to_tex(selected_experiences, "generated_resume.tex")
+    projects_json_to_tex(selected_projects, "generated_resume.tex")
+
+    with open("generated_resume.tex", 'a') as file:
+        file.write("\\end{document}\n")
+
 
     # Compile the LaTeX file to PDF using pdflatex
     subprocess.run(["pdflatex", "generated_resume.tex"])
@@ -290,10 +54,84 @@ def extract_keywords_openai(job_description):
     return response.choices[0].text.strip()
 
 
+def experiences_json_to_tex(experiences, filename):
+    with open(filename, 'a') as file:  # Open the .tex file in append mode
+        file.write("%-----------EXPERIENCE -----------\n\n")
+        file.write("\\vspace{-15pt}\n")
+        file.write("\\section{EXPERIENCE}\n")
+        file.write("\\resumeSubHeadingListStart\n")
+        for experience in experiences:
+            file.write("\\resumeSubheading\n")
+            file.write(f"    {{{experience['title']}}}{{{experience['dates']}}}\n")
+            file.write(f"    {{{experience['company']}}}{{{experience['location']}}}\n")
+            file.write("    \\resumeItemListStart\n")
+            for item in experience['description']:
+                file.write(f"        \\resumeItem{{{item}}}\n")
+            file.write("    \\resumeItemListEnd\n\n")
+        file.write("\\resumeSubHeadingListEnd\n\n")
+
+
+def projects_json_to_tex(projects, filename):
+    with open(filename, 'a') as file:  # Open the .tex file in append mode
+        file.write("%-----------PROJECTS -----------\n\n")
+        file.write("\\vspace{-15pt}\n")
+        file.write("\\section{PROJECTS}\n")
+        file.write("\\resumeSubHeadingListStart\n")
+
+        for project in projects:
+            file.write(rf"{{\textbf{{{project['name']}}} $|$" + '\n')  # Project name
+            file.write(r"          {\faIcon{code}}\n" + '\n')  # FontAwesome icon with a new line
+
+            # Add hyperlink if available
+            file.write(rf"          \ifHYPERLINKON" + '\n')
+            file.write(rf"          \underline{{\href{{{project['link']}}}{{\textcolor{{gray}}{{link}}}}}}" + '\n')
+            file.write(rf"          \else" + '\n')
+            file.write(rf"          \fi" + '\n')
+            file.write(rf"" + '\n')
+
+            file.write("    \\resumeItemListStart\n")
+
+
+
+            # Always write the description
+            for item in project['description']:
+                file.write(f"        \\resumeItem{{{item}}}\n")
+            file.write("    \\resumeItemListEnd\n\n")
+
+
+
+# def projects_json_to_tex(projects, filename):
+#     with open(filename, 'a') as file:  # Open the .tex file in append mode
+#         file.write("%-----------PROJECTS -----------\n\n")
+#         file.write("\\vspace{-14pt}\n")
+#         file.write("\\section{PROJECTS}\n")
+#         file.write("\\vspace{-5pt}\n")
+#         file.write("\\resumeSubHeadingListStart\n")
+#         for project in projects:
+#             file.write("      \\resumeProjectHeading\n")
+#             file.write(f"          {{\\textbf{{{project['name']}}} $|$ \n")
+#             file.write(f"          {{\\faIcon{{code}}}} \n")
+#             file.write("          \\ifHYPERLINKON\n")
+#             file.write(f"    \\underline{{\\href{{{project['link']}}}{{\\textcolor{{gray}}{{link}}}}}}\n")
+#             file.write("          \\else\n")
+#             file.write("          \\fi\n")
+#             file.write(f"          }}{{{project['dates']}}}\n")
+#             file.write("          \\resumeItemListStart\n")
+#
+#             for item in project['description']:
+#                 file.write(f"            \\resumeItem{{{item}}}\n")
+#
+#             file.write("          \\resumeItemListEnd\n")
+#             file.write("          \\vspace{-15pt}\n")
+#
+#         file.write("    \\resumeSubHeadingListEnd\n\n")
+
+
 # Example usage:
 
 # Provide the indices for the experiences and projects you want to include
-experience_indices = [0, 1]  # For example, include the first two experiences
+
+experience_indices = [0]  # For example, include the first two experiences
 project_indices = [0]  # Include only the first project
 
 # Optionally, you can use the OpenAI function to extract keywords from a job description
@@ -305,11 +143,12 @@ project_indices = [0]  # Include only the first project
 
 
 # STUB
-selected_experiences = 0
-selected_projects = 0
+# selected_experiences = 0
+# selected_projects = 0
 
-#selected_experiences = filter_items_by_indices(resume_data['experience'], experience_indices)
-#selected_projects = filter_items_by_indices(resume_data['projects'], project_indices)
+selected_experiences = filter_items_by_indices(resume_data['experience'], experience_indices)
+selected_projects = filter_items_by_indices(resume_data['projects'], project_indices)
 
 # Generate and compile the LaTeX resume
+
 generate_latex(resume_data, selected_experiences, selected_projects)
