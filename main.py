@@ -77,54 +77,27 @@ def projects_json_to_tex(projects, filename):
         file.write("\\vspace{-15pt}\n")
         file.write("\\section{PROJECTS}\n")
         file.write("\\resumeSubHeadingListStart\n")
+        file.write("\\resumeProjectHeading\n")
+
 
         for project in projects:
-            file.write(rf"{{\textbf{{{project['name']}}} $|$" + '\n')  # Project name
-            file.write(r"          {\faIcon{code}}\n" + '\n')  # FontAwesome icon with a new line
+            file.write(rf"{{\textbf{{{project['name']}}} $|$")  # Project name
+            file.write(r"{\faIcon{code}}" + '\n')  # FontAwesome icon with a new line
 
             # Add hyperlink if available
             file.write(rf"          \ifHYPERLINKON" + '\n')
-            file.write(rf"          \underline{{\href{{{project['link']}}}{{\textcolor{{gray}}{{link}}}}}}" + '\n')
+            file.write(rf"    \underline{{\href{{{project['link']}}}{{\textcolor{{gray}}{{link}}}}}}" + '\n')
             file.write(rf"          \else" + '\n')
             file.write(rf"          \fi" + '\n')
-            file.write(rf"" + '\n')
+            file.write("    }" + f"{{{project['dates']}}}\n")
 
             file.write("    \\resumeItemListStart\n")
-
-
 
             # Always write the description
             for item in project['description']:
                 file.write(f"        \\resumeItem{{{item}}}\n")
             file.write("    \\resumeItemListEnd\n\n")
-
-
-
-# def projects_json_to_tex(projects, filename):
-#     with open(filename, 'a') as file:  # Open the .tex file in append mode
-#         file.write("%-----------PROJECTS -----------\n\n")
-#         file.write("\\vspace{-14pt}\n")
-#         file.write("\\section{PROJECTS}\n")
-#         file.write("\\vspace{-5pt}\n")
-#         file.write("\\resumeSubHeadingListStart\n")
-#         for project in projects:
-#             file.write("      \\resumeProjectHeading\n")
-#             file.write(f"          {{\\textbf{{{project['name']}}} $|$ \n")
-#             file.write(f"          {{\\faIcon{{code}}}} \n")
-#             file.write("          \\ifHYPERLINKON\n")
-#             file.write(f"    \\underline{{\\href{{{project['link']}}}{{\\textcolor{{gray}}{{link}}}}}}\n")
-#             file.write("          \\else\n")
-#             file.write("          \\fi\n")
-#             file.write(f"          }}{{{project['dates']}}}\n")
-#             file.write("          \\resumeItemListStart\n")
-#
-#             for item in project['description']:
-#                 file.write(f"            \\resumeItem{{{item}}}\n")
-#
-#             file.write("          \\resumeItemListEnd\n")
-#             file.write("          \\vspace{-15pt}\n")
-#
-#         file.write("    \\resumeSubHeadingListEnd\n\n")
+            file.write("    \\resumeItemListEnd\n")
 
 
 # Example usage:
@@ -133,18 +106,6 @@ def projects_json_to_tex(projects, filename):
 
 experience_indices = [0]  # For example, include the first two experiences
 project_indices = [0]  # Include only the first project
-
-# Optionally, you can use the OpenAI function to extract keywords from a job description
-# job_description = "Looking for a software engineer experienced in Python, Docker, and REST APIs."
-# keywords = extract_keywords_openai(job_description)
-# print("Extracted Keywords:", keywords)
-
-# Filter the experiences and projects based on the indices
-
-
-# STUB
-# selected_experiences = 0
-# selected_projects = 0
 
 selected_experiences = filter_items_by_indices(resume_data['experience'], experience_indices)
 selected_projects = filter_items_by_indices(resume_data['projects'], project_indices)
