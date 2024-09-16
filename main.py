@@ -1,20 +1,11 @@
-import os
 import json
 import subprocess
-from dotenv import load_dotenv
-import openai
+import openai_api
 
-# Load environment variables from .env file
-load_dotenv()
-
-# Load OpenAI API key from the .env file
-openai_api_key = os.getenv('OPENAI_API_KEY')
-openai.api_key = openai_api_key
 
 # Load the JSON data from a file
 with open("resume_data.json", "r") as f:
     resume_data = json.load(f)
-
 
 # Function to filter experiences and projects based on indices
 def filter_items_by_indices(items, indices):
@@ -27,7 +18,7 @@ def filter_skills_by_indices(skills, skill_type, indices):
 
 
 # Function to generate LaTeX from filtered data
-def generate_latex(resume_data, experiences, projects):
+def generate_latex(resume_data, experiences, projects, job_desc):
     # Define the LaTeX template
 
     with open('resume_template.tex', 'r') as template_file:
@@ -39,23 +30,13 @@ def generate_latex(resume_data, experiences, projects):
 
     experiences_json_to_tex(selected_experiences, "generated_resume.tex")
     projects_json_to_tex(selected_projects, "generated_resume.tex")
-    skills_json_to_tex("generated_resume.tex")
+    skills_json_to_tex(selected_languages, selected_frameworks, selected_tools, selected_data_science,"generated_resume.tex")
 
     with open("generated_resume.tex", 'a') as file:
         file.write("\\end{document}\n")
 
     # Compile the LaTeX file to PDF using pdflatex
     subprocess.run(["pdflatex", "generated_resume.tex"])
-
-
-# Function to extract keywords from a job description using OpenAI
-def extract_keywords_openai(job_description):
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=f"Extract key skills and responsibilities from this job description: {job_description}",
-        max_tokens=150,
-    )
-    return response.choices[0].text.strip()
 
 
 def experiences_json_to_tex(experiences, filename):
@@ -104,7 +85,7 @@ def projects_json_to_tex(projects, filename):
             file.write("    \\resumeItemListEnd\n")
 
 
-def skills_json_to_tex(filename):
+def skills_json_to_tex(selected_languages, selected_frameworks, selected_tools, selected_data_science, filename):
     with open(filename, 'a') as file:  # Open the .tex file in append mode
         file.write("\\vspace{-14pt}\n")
         file.write("\\section{TECHNICAL SKILLS}\n")
@@ -135,27 +116,27 @@ def skills_json_to_tex(filename):
 
 # Provide the indices for the experiences and projects you want to include
 
-experience_indices = [0]  # For example, include the first two experiences
-project_indices = [0]  # Include only the first project
 
-
-############# DEV #####################
-
-# Select all indices for a given skill type
-def select_all_indices(skills, skill_type):
-    return list(range(len(skills[skill_type])))
-
-
-languages_indices = select_all_indices(resume_data['technical_skills'], 'languages')
-frameworks_indices = select_all_indices(resume_data['technical_skills'], 'frameworks')
-tools_indices = select_all_indices(resume_data['technical_skills'], 'developer_tools')
-data_science_indices = select_all_indices(resume_data['technical_skills'], 'data_science_machine_learning')
+# ############# DEV #####################
+#
+# # Select all indices for a given skill type
+# def select_all_indices(skills, skill_type):
+#     return list(range(len(skills[skill_type])))
+#
+#
+# languages_indices = select_all_indices(resume_data['technical_skills'], 'languages')
+# frameworks_indices = select_all_indices(resume_data['technical_skills'], 'frameworks')
+# tools_indices = select_all_indices(resume_data['technical_skills'], 'developer_tools')
+# data_science_indices = select_all_indices(resume_data['technical_skills'], 'data_science_machine_learning')
 
 # # skills indices
-# languages_indices = [1, 2, 3]  # Select specific languages
-# frameworks_indices = [0, 1]  # Select specific frameworks
-# tools_indices = [2, 3]  # Select specific developer tools
-# data_science_indices = [0, 2, 4]  # Select specific data science/machine learning skills
+
+experience_indices = [0]  # For example, include the first two experiences
+project_indices = [0]  # Include only the first project
+languages_indices = [1, 2, 3]  # Select specific languages
+frameworks_indices = [0, 1]  # Select specific frameworks
+tools_indices = [2, 3]  # Select specific developer tools
+data_science_indices = [0, 2, 4]  # Select specific data science/machine learning skills
 
 
 selected_experiences = filter_items_by_indices(resume_data['experience'], experience_indices)
@@ -171,6 +152,5 @@ selected_data_science = (
 
 # Generate and compile the LaTeX resume
 
-generate_latex(resume_data, selected_experiences, selected_projects)
-print(selected_experiences)
-print(selected_data_science)
+job_desc = str(input("Please Enter the job description: "))
+generate_latex(resume_data, selected_experiences, selected_projects, job_desc)
