@@ -55,7 +55,10 @@
             "tags": ["machine learning", "data science", "KNN", "R"]
         }
     ],
-    "skills": [
-        "PHP", "Java", "Python", "C/C++", "SQL (Postgres)", "JavaScript", "TypeScript", "HTML/CSS", "R", "Racket"
-    ]
+    "technical_skills": {
+        "languages": ["PHP", "Java", "Python", "C/C++", "SQL (Postgres)", "JavaScript", "TypeScript", "HTML/CSS", "R", "Racket"],
+        "frameworks": ["React", "Node.js", "Swing", "JUnit", "Express.js", "TypeORM", "Tailwind CSS"],
+        "developer_tools": ["Git", "Docker", "VS Code", "Android Studio", "IntelliJ", "WebStorm", "DataSpell", "Jupyter Notebook", "Excel"],
+        "data_science_machine_learning": ["Pandas", "SciPy", "NumPy", "matplotlib", "Tidyverse", "Tidymodels", "kknn", "GGally", "readr"]
+  }
 }
